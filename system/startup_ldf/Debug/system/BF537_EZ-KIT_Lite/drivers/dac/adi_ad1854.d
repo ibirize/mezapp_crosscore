@@ -1,0 +1,39 @@
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/ADSP-BF537_EZKIT-Rel1.0.0/BF537_EZ-KIT_Lite/Blackfin/src/drivers/dac/ad1854/adi_ad1854.c
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/ADSP-BF537_EZKIT-Rel1.0.0/BF537_EZ-KIT_Lite/Blackfin/src/drivers/dac/ad1854/adi_ad1854_def.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/ADSP-BF537_EZKIT-Rel1.0.0/BF537_EZ-KIT_Lite/Blackfin/include/drivers/dac/ad1854/adi_ad1854.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/pwr/adi_pwr.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/sys/platform.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/sys/_adi_platform.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/cdefBF537.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/cdefBF534.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/defBF534.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/def_LPBlackfin.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/cdef_LPBlackfin.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/defBF537.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/int/adi_int.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/adi_types.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/stdint.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/yvals.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/stdbool.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/int/adi_int_id.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/interrupt.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/sys/exception.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/int/adi_sic.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/pwr/adi_pwr_bf5xx.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/blackfin.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/pwr/adi_pwr_bf53x.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/gpio/adi_gpio.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/drivers/sport/adi_sport.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/drivers/sport/adi_sport_bf5xx.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/stddef.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/dma/adi_dma.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/dma/adi_mdma_bf5xx.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/dma/adi_mdma_streams_bf5xx.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/dma/adi_pdma_bf5xx.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/services/dma/adi_pdma_channels_bf5xx.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/adi_osal.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/adi_osal_arch.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/drivers/device_class/audio/adi_dev_audio_pdd.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/drivers/device_class/audio/adi_dev_audio_channel_id.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/string.h
+system/BF537_EZ-KIT_Lite/drivers/dac/adi_ad1854.doj: ../../../../../../../Analog\ Devices/CrossCore\ Embedded\ Studio\ 1.0.3/Blackfin/include/assert.h
