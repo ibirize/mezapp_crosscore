@@ -215,12 +215,11 @@ fract32 *ptr_fr32;
 
 #define CARACTERES_PRUEBA 8
 
-int cont_ciclos;
 
 section ("sdram0") fract32 send_through_dac_right[BUFFER_SIZE_CONV/4];
 section ("sdram0") fract32 send_through_dac_left[BUFFER_SIZE_CONV/4];
-section ("sdram0") fract32 received_from_adc_right[BUFFER_SIZE_CONV/4];
-section ("sdram0") fract32 received_from_adc_left[BUFFER_SIZE_CONV/4];
+section ("sdram0") fract32 received_from_adc_right[NUM_SAMPLES_TX];
+section ("sdram0") fract32 received_from_adc_left[NUM_SAMPLES_TX];
 
 section ("sdram0") int indice_guardado = 0;
 
@@ -229,6 +228,8 @@ section ("sdram0") unsigned char trama_entrada_mod[CARACTERES_PRUEBA + FRAME];//
 section ("sdram0") unsigned char trama_salida_demod[FRAME];
 section ("sdram0") unsigned char send_through_uart[BUFFER_SIZE];
 section ("sdram0") unsigned char receive_from_uart[BUFFER_SIZE];
+bool packetReceivedUART;
+bool packetReceivingADC;
 
 
 
@@ -249,7 +250,7 @@ static void CheckResult(ADI_UART_RESULT result) {
 void initializate_peripherals(){
 	 unsigned int i;
 
-	 cont_ciclos=0;
+	 packetReceivedUART = false;
 
 	    ADI_UART_RESULT eResult;
 
@@ -262,16 +263,7 @@ void initializate_peripherals(){
 
 		//fir_init(state1, filter_fr32, delay1, NUM_COEFFS, 0);
 		//fir_init(state2, filter_fr32, delay2, NUM_COEFFS, 0);
-	    	//Initializates the filter delay
-	    	for (int i = 0; i < NUM_COEFFS; i++)
-	    	{
-	    		delay_real[i] = 0;
-	    		delay_imag[i] = 0;
-	    	}
 
-	    	//Initializates the filter
-	    	fir_init(state_real, filter_coefficients, delay_real, NUM_COEFFS, 0);
-	    	fir_init(state_imag, filter_coefficients, delay_imag, NUM_COEFFS, 0);
 
 		/* Initialize buffer pointers */
 		pAdcBuf = NULL;
@@ -394,7 +386,7 @@ void sendThroughUART(){
 	respuestaTx = adi_uart_GetTxBuffer (hDevice, &UBufferBidali);
 
 	// Copiamos lo que quermoes enviar
-	memcpy(UBufferBidali, send_through_uart, BUFFER_SIZE);
+	memcpy(UBufferBidali, symbols, BUFFER_SIZE);
 
 	//Enviamos el buffer
 	respuestaTx = adi_uart_SubmitTxBuffer (hDevice, UBufferBidali, BUFFER_SIZE); //envia
@@ -411,10 +403,11 @@ void receiveFromUART(){
 
 		// Aquí lo copio al buffer de tx y lo envio
 		memcpy(receive_from_uart,UBufferJaso, BUFFER_SIZE);	//void *s1, const void *s2, size_t n
-		sendThroughUART();
+		//sendThroughUART();
 
 		// Acordarse de volver a enviar el buffer
 		respuestaRx=adi_uart_SubmitRxBuffer (hDevice, UBufferJaso, BUFFER_SIZE);
+		packetReceivedUART = true;
 	}
 	//
 
@@ -423,6 +416,7 @@ void receiveFromUART(){
 void getADCinput(){
 
 	int cont = 0;
+	int indice;
 
 	bool guardar = false;
 
@@ -435,9 +429,19 @@ void getADCinput(){
 
 			for(int indice_conversor=0 ; indice_conversor<NUM_SAMPLES ; indice_conversor++){
 
-				received_from_adc_right[indice_conversor]=(ptr_fr32[indice_conversor*2])<<8;
-				received_from_adc_left[indice_conversor]=(ptr_fr32[indice_conversor*2+1])<<8;
+				if(received_from_adc_left[indice_conversor] < -1073741823){
+					packetReceivingADC = true;
+				}
 
+				if(packetReceivingADC){
+					received_from_adc_right[indice_guardado]=(ptr_fr32[indice_conversor*2])<<8;
+					received_from_adc_left[indice_guardado]=(ptr_fr32[indice_conversor*2+1])<<8;//syncronization signal
+					if(indice_guardado++ >= NUM_SAMPLES_TX){
+						packetReceivingADC = false;
+						packetReceivedADC = true;
+						indice_guardado = 0;
+					}
+				}
 			}
 
 			/* Re-submit ADC buffer */
@@ -449,6 +453,8 @@ void getADCinput(){
 				DEBUG_MSG2("Failed to submit buffer to AD1871", Result);
 				//break;
 			}
+
+
 
 			/* Clear the buffer pointer */
 			pAdcBuf = NULL;
@@ -535,20 +541,23 @@ void checkDACinput(){
 				//break;
 			}
 
-			if (cont_ciclos==10)
-			{
-				cont_ciclos=0;
-			}
-
-			cont_ciclos++;
-
 			ptr_fr32 = (fract32 *) pDacBuf;
 
 			for(int index_sample=0 ; index_sample<NUM_SAMPLES; index_sample++){
 
-				ptr_fr32[index_sample*2] = send_through_dac_right[index_sample]>>8;
-				ptr_fr32[index_sample*2+1] = send_through_dac_left[index_sample]>>8;
+				if(index_sample < NUM_SAMPLES_TX && packetReceivedUART){
+					ptr_fr32[index_sample*2]	= modulated_signal[index_sample]>>8;
+					ptr_fr32[index_sample*2+1]	= modulated_synchronization[index_sample]>>8;
+				}else{
+					ptr_fr32[index_sample*2]	= 0;
+					ptr_fr32[index_sample*2+1]	= 0;
+				}
 			}
+
+			if(packetReceivedUART){
+				packetReceivedUART = false;
+			}
+
 
 		}
 

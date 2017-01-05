@@ -16,4 +16,6 @@ void dowmsample(void);
 void demapper(void);
 void init_ranges(void);
 
+extern bool packetReceivedADC;
+
 #endif /* DEMODULATOR_H_ */

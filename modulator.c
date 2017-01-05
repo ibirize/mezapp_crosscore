@@ -2,6 +2,7 @@
 #include <filter.h>
 #include "modulator.h"
 #include "modem.h"
+#include "peripherals.h"
 #include <fract2float_conv.h>
 
 
@@ -12,6 +13,7 @@ segment ("sdram0") fract32 frame_symbols_imag[NUMBER_OF_SYMBOLS];
 
 segment ("sdram0") fract32 frame_symbols_real_upsample[NUM_SAMPLES_TX];
 segment ("sdram0") fract32 frame_symbols_imag_upsample[NUM_SAMPLES_TX];
+segment ("sdram0") fract32 modulated_synchronization[NUM_SAMPLES_TX];
 
 
 /*
@@ -78,8 +80,8 @@ void mapper(){
 	int i=0;
 	int numDecimal = 0;
 	for (i = 0; i < NUMBER_OF_SYMBOLS; i++) {
-		if(i%2 != 0) numDecimal = frame[i/2] & 0xF; //pares numeros de la derecha
-		else numDecimal = ((frame[i/2] & 0xF0)>>4); //impares numeros de la izquierda
+		if(i%2 != 0) numDecimal = receive_from_uart[i/2] & 0xF; //pares numeros de la derecha
+		else numDecimal = ((receive_from_uart[i/2] & 0xF0)>>4); //impares numeros de la izquierda
 
 		frame_symbols_real[i] = constelation_real[numDecimal];
 		frame_symbols_imag[i] = constelation_imag[numDecimal];
@@ -92,13 +94,22 @@ void mapper(){
 void upsample(){
 	int i=0;
 
-	for (i = 0; i < NUMBER_OF_SYMBOLS_OVERSAMPLED; i++) {
-		if(i%8 == 0){
+	for (i = 0; i < NUM_SAMPLES_TX; i++) {
+
+		if(i%8 == 0 && i < NUMBER_OF_SYMBOLS_OVERSAMPLED){
+
+			if(i==0){
+				modulated_synchronization[i] = 0x80000000;
+			}else{
+				modulated_synchronization[i] = 0x7FFFFFFF;
+			}
+
 			frame_symbols_imag_upsample[i] = frame_symbols_imag[i/8];
 			frame_symbols_real_upsample[i] = frame_symbols_real[i/8];
 		}else{
 			frame_symbols_imag_upsample[i] = 0;
 			frame_symbols_real_upsample[i] = 0;
+			modulated_synchronization[i] = 0;
 		}
 	}
 }

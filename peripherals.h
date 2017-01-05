@@ -10,7 +10,7 @@
 
 #include <fract.h>
 
-#define BUFFER_SIZE 4
+#define BUFFER_SIZE FRAME
 #define NUM_SAMPLES 8192
 
 /*Functions*/
@@ -29,7 +29,6 @@ extern fract32 send_through_dac_right[];
 extern fract32 received_from_adc_right[];
 extern fract32 send_through_dac_left[];
 extern fract32 received_from_adc_left[];
-
 
 
 #endif /* PERIPHERALs_H_ */

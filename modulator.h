@@ -16,4 +16,6 @@ void modulate(void);
 void mapper(void);
 //void funcion_filtro(void);
 
+extern bool packetReceivedUART;
+
 #endif /* MODULATOR_H_ */

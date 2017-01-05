@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-segment ("sdram0") fract32 received_signal[NUM_SAMPLES_TX];
 segment ("sdram0") fract32 received_real[NUM_SAMPLES_RX];
 segment ("sdram0") fract32 received_imag[NUM_SAMPLES_RX];
 
@@ -32,17 +31,15 @@ segment ("sdram0") float range2_f=0.6325;
 segment ("sdram0") fract32 range1;
 segment ("sdram0") fract32 range2;
 
-
-
 segment ("sdram0") char prueba;
 
 
-void init_demodulator(){
-	for (int i = 0;  i < NUM_SAMPLES_TX; i++) {
-		received_signal[i] = modulated_signal[i];
-	}
+bool packetReceivedADC;
 
+void init_demodulator(){
+	packetReceivedADC = false;
 }
+
 /*
  * This function is used to i
  */
@@ -59,8 +56,8 @@ void demodulator(){
 void demodulate(){
 
 	for (int i = 0; i < NUM_SAMPLES_TX; i++) {
-		received_real[i] =(received_signal[i]*cos_modulator_6KHz[i%8])*1.4142;
-		received_imag[i] =(-received_signal[i]*sin_modulator_6KHz[i%8])*1.4142;
+		received_real[i] =(received_from_adc_right[i]*cos_modulator_6KHz[i%8])*1.4142;
+		received_imag[i] =(-received_from_adc_right[i]*sin_modulator_6KHz[i%8])*1.4142;
 	}
 }
 
@@ -90,10 +87,21 @@ void filter_demodulator(){
 
 //coge los symbolos del real y del imaginario
 void dowmsample(){
+	int i, j;
+	for(i = 0, j = 0; i < NUM_SAMPLES_TX && j < NUMBER_OF_SYMBOLS; i++){
+
+		if(received_from_adc_left[i] < -1073741823 || received_from_adc_left[i] > 1073741823){
+			received_symbol_real[j] = filtered_fr_real[i+FILTER_DELAY*2];
+			received_symbol_imag[j] = filtered_fr_imag[i+FILTER_DELAY*2];
+			j++;
+		}
+	}
+
+	/*
 	for (int i = 0; i < NUMBER_OF_SYMBOLS; i++) {
 		received_symbol_imag[i]=filtered_fr_imag[2*FILTER_DELAY+i*8];
 		received_symbol_real[i]=filtered_fr_real[2*FILTER_DELAY+i*8];
-	}
+	}*/
 }
 
 
@@ -156,7 +164,7 @@ void demapper(){
 
 		symbol_bits=(bit_1<<3)+(bit_2<<2)+(bit_3<<1)+bit_4;
 
-	/*	prueba=symbol_bits;
+		/*	prueba=symbol_bits;
 		printf("%d", (prueba));*/
 		symbols[i]=symbol_bits;
 

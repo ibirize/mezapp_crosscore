@@ -24,37 +24,34 @@ int main(int argc, char *argv[])
 	 */
 	//adi_initComponents();
 
-	frame[0] = 0xAF;
-	frame[1] = 0xAB;
-
 	initializate_peripherals();
+	init_modulator();
+	demodulator();
 	//checkDACinput();
 	//sendThroughDAC();
 
 
 	while(1) {
-	for(int i = 0; i < NUM_SAMPLES; i++){
-		send_through_dac_right[i] = float_to_fr32(0.9*sin_modulator_6KHz[i%6]);
-		send_through_dac_left[i] = float_to_fr32(0.9*cos_modulator_6KHz[i%6]);
+		receiveFromUART();
+
+		if(packetReceivedUART){
+			packetReceivedUART = false;
+			modulator();
+		}
+
+		checkDACinput();
+		sendThroughDAC();
+
+		checkADCinput();
+		getADCinput();
+
+		if(packetReceivedADC){
+			packetReceivedADC = false;
+			demodulator();
+			sendThroughUART();
+		}
+
 	}
-
-	checkDACinput();
-	sendThroughDAC();
-/*
-	for(int i = 0; i < NUM_SAMPLES; i++){
-		send_through_dac_right[i] = -1;
-
-		if(i == -1)
-			send_through_dac_left[i] = -1;
-		else if(i % 8 == 0)
-			send_through_dac_left[i] = 1;
-		else
-			send_through_dac_left[i] = 0;
-	}
-
-	checkDACinput();
-	sendThroughDAC();*/
-}
 
 
 //	char* fff = "ib";
@@ -66,7 +63,7 @@ int main(int argc, char *argv[])
 //	}
 
 //	salirPorUART();
-	init_modulator();
+
 	modulator();
 
 	init_demodulator();

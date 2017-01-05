@@ -11,7 +11,7 @@
 #define SYMBOL_FREQ        6000    //Hz
 
 #define OVERSAMPLING                    SAMPLING_FREQ/SYMBOL_FREQ
-#define FRAME                           2
+#define FRAME                           263
 #define NUMBER_OF_SYMBOLS               FRAME*2
 #define NUMBER_OF_SYMBOLS_OVERSAMPLED   NUMBER_OF_SYMBOLS*8
 #define NUM_COEFFS                      49
@@ -43,6 +43,7 @@ extern fir_state_fr32 state_imag;
 
 extern segment ("sdram0") fract32 filter_coefficients[];
 extern fract32 modulated_signal[NUM_SAMPLES_TX];
+extern fract32 modulated_synchronization[NUM_SAMPLES_TX];
 
 
 
